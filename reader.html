@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>قارئ الكتاب</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: #f1f5f9;
+      font-family: Arial, sans-serif;
+      user-select: none;
+      overflow-x: hidden;
+    }
+
+    /* Header */
+    .reader-header {
+      height: 70px;
+      background: #111827;
+      color: white;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 0 25px;
+    }
+
+    .reader-header h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .security-message {
+      font-size: 13px;
+      color: #fbbf24;
+    }
+
+    /* PDF Container */
+    .pdf-container {
+      width: 100%;
+      height: calc(100vh - 100px);
+
+      background: #e5e7eb;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #pdfViewer {
+      width: 100%;
+      height: 100%;
+
+      border: none;
+      background: white;
+    }
+
+    /* No Book Message */
+    .error-message {
+      text-align: center;
+      padding: 40px;
+    }
+
+    .error-message h2 {
+      color: #dc2626;
+    }
+
+    .error-message button {
+      margin-top: 20px;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      background: #2563eb;
+      color: white;
+      cursor: pointer;
+    }
+
+    /* Mobile */
+    @media (max-width: 600px) {
+      .reader-header {
+        padding: 0 15px;
+      }
+
+      .reader-header h1 {
+        font-size: 16px;
+      }
+
+      .security-message {
+        font-size: 11px;
+      }
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- Header -->
+
+  <header class="reader-header">
+
+```
+<h1 id="bookTitle">
+  قارئ الكتاب
+</h1>
+
+<div class="security-message">
+  🔒 قراءة فقط
+</div>
+```
+
+  </header>
+
+  <!-- PDF Viewer -->
+
+  <main class="pdf-container">
+
+```
+<iframe
+  id="pdfViewer"
+  title="قارئ الكتاب">
+</iframe>
+```
+
+  </main>
+
+  <script>
+
+    /*
+      Get selected book from localStorage
+    */
+
+    const storedBook =
+      localStorage.getItem("selectedBook");
+
+
+    /*
+      If no book was selected
+    */
+
+    if (!storedBook) {
+
+      document.body.innerHTML = `
+
+        <div class="error-message">
+
+          <h2>
+            لم يتم اختيار كتاب
+          </h2>
+
+          <p>
+            من فضلك اختر كتابًا من المكتبة أولًا.
+          </p>
+
+          <button onclick="goBack()">
+            العودة إلى المكتبة
+          </button>
+
+        </div>
+
+      `;
+
+    } else {
+
+      /*
+        Convert the stored JSON string
+        back to the PDF URL
+      */
+
+      const pdfUrl =
+        JSON.parse(storedBook);
+
+
+      /*
+        Set the PDF viewer source
+
+        toolbar=0
+        Hide PDF toolbar
+
+        navpanes=0
+        Hide navigation panel
+
+        scrollbar=0
+        Hide scrollbar where supported
+      */
+
+      document
+        .getElementById("pdfViewer")
+        .src =
+        `${pdfUrl}#toolbar=0&navpanes=0&scrollbar=0`;
+
+    }
+
+
+    /*
+      Disable Right Click
+    */
+
+    document.addEventListener(
+      "contextmenu",
+      function (event) {
+
+        event.preventDefault();
+
+      }
+    );
+
+
+    /*
+      Disable common keyboard shortcuts
+
+      Ctrl + S = Save
+      Ctrl + P = Print
+      Ctrl + U = View Source
+      Ctrl + Shift + I = Developer Tools
+      F12 = Developer Tools
+    */
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
+
+        const key =
+          event.key.toLowerCase();
+
+
+        if (
+
+          event.ctrlKey &&
+          (
+            key === "s" ||
+            key === "p" ||
+            key === "u"
+          )
+
+        ) {
+
+          event.preventDefault();
+
+        }
+
+
+        if (
+
+          event.ctrlKey &&
+          event.shiftKey &&
+          key === "i"
+
+        ) {
+
+          event.preventDefault();
+
+        }
+
+
+        if (event.key === "F12") {
+
+          event.preventDefault();
+
+        }
+
+      }
+    );
+
+
+    /*
+      Prevent Dragging
+    */
+
+    document.addEventListener(
+      "dragstart",
+      function (event) {
+
+        event.preventDefault();
+
+      }
+    );
+
+
+    /*
+      Return to library
+    */
+
+    function goBack() {
+
+      window.location.href =
+        "index.html";
+
+    }
+
+  </script>
+
+</body>
+
+</html>

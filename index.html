@@ -614,7 +614,7 @@
                 🔒 قراءة فقط
               </span>
 
-              <button class="btn btn-primary" onclick="openReader()">
+              <button class="btn btn-primary" onclick="openReader(`files/OOP.pdf`)">
                 قراءة
               </button>
             </div>
@@ -634,7 +634,7 @@
                 🔒 قراءة فقط
               </span>
 
-              <button class="btn btn-primary" onclick="openReader()">
+              <button class="btn btn-primary" onclick="openReader(`files/HTML.pdf`)">
                 قراءة
               </button>
             </div>
@@ -654,7 +654,7 @@
                 📥 قابل للتحميل
               </span>
 
-              <button class="btn btn-primary">
+              <button class="btn btn-primary" onclick="dowinloadBook(`files/html-css-reference.pdf`)">
                 تحميل
               </button>
             </div>
@@ -856,12 +856,34 @@
 
 
   <script>
-    function openReader() {
-      alert(
-        "سيتم فتح الكتاب داخل القارئ الإلكتروني.\n\n" +
-        "🔒 الكتاب محمي للقراءة فقط ولا يوجد خيار تحميل مباشر."
-      );
-    }
+    function openReader(book) {
+  // تخزين بيانات الكتاب مؤقتًا
+  localStorage.setItem("selectedBook", JSON.stringify(book));
+
+  // الانتقال إلى صفحة القارئ
+  window.location.href = "reader.html";
+}
+
+
+
+function dowinloadBook(book) {
+
+const link =
+  document.createElement("a");
+
+link.href =
+  book;
+
+link.download =
+  "";
+
+document.body.appendChild(link);
+
+link.click();
+
+document.body.removeChild(link);
+
+}
   </script>
 
 </body>
