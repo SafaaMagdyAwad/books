@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>أكاديمية اقرأ</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Cairo", sans-serif;
+      background: #f8fafc;
+      color: #172033;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    /* Navbar */
+    header {
+      background: white;
+      border-bottom: 1px solid #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav {
+      height: 75px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      color: #2563eb;
+    }
+
+    .logo span {
+      color: #f59e0b;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      color: #475569;
+      font-size: 15px;
+    }
+
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 11px 20px;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-outline {
+      background: white;
+      border: 1px solid #2563eb;
+      color: #2563eb;
+    }
+
+    .btn-outline:hover {
+      background: #eff6ff;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #eff6ff, #ffffff);
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .hero-text h1 {
+      font-size: 46px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .hero-text h1 span {
+      color: #2563eb;
+    }
+
+    .hero-text p {
+      color: #64748b;
+      font-size: 17px;
+      line-height: 2;
+      margin-bottom: 30px;
+      max-width: 550px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .hero-card {
+      background: white;
+      border-radius: 25px;
+      padding: 25px;
+      box-shadow: 0 15px 40px rgba(15, 23, 42, 0.1);
+      position: relative;
+    }
+
+    .hero-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 18px;
+    }
+
+    .floating-card {
+      position: absolute;
+      bottom: 10px;
+      right: -25px;
+      background: white;
+      padding: 18px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .floating-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 12px;
+      background: #dbeafe;
+      color: #2563eb;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+    }
+
+    /* Sections */
+    section {
+      padding: 75px 0;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-header h2 {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .section-header p {
+      color: #64748b;
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
+    }
+
+    .feature-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+
+    .feature-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      color: #64748b;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    /* Books */
+    .books {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .book-card {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(15, 23, 42, 0.06);
+      transition: 0.3s;
+    }
+
+    .book-card:hover {
+      transform: translateY(-7px);
+    }
+
+    .book-cover {
+      height: 210px;
+      background: linear-gradient(135deg, #2563eb, #1e3a8a);
+      display: grid;
+      place-items: center;
+      color: white;
+      font-size: 60px;
+    }
+
+    .book-info {
+      padding: 20px;
+    }
+
+    .book-info h3 {
+      margin-bottom: 8px;
+    }
+
+    .book-info p {
+      color: #64748b;
+      font-size: 13px;
+      margin-bottom: 15px;
+    }
+
+    .book-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .badge {
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    .protected {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .download {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+
+    /* Pricing */
+    .pricing {
+      background: #eff6ff;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .plan {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      border: 1px solid #e5e7eb;
+      text-align: center;
+    }
+
+    .plan.featured {
+      border: 2px solid #2563eb;
+      transform: scale(1.04);
+    }
+
+    .plan h3 {
+      font-size: 22px;
+      margin-bottom: 15px;
+    }
+
+    .price {
+      font-size: 36px;
+      font-weight: 800;
+      color: #2563eb;
+      margin-bottom: 20px;
+    }
+
+    .price small {
+      font-size: 14px;
+      color: #64748b;
+    }
+
+    .plan ul {
+      list-style: none;
+      margin-bottom: 25px;
+      color: #64748b;
+      line-height: 2.4;
+      font-size: 14px;
+    }
+
+    /* Protected Reader */
+    .reader-demo {
+      background: #111827;
+      border-radius: 20px;
+      padding: 25px;
+      color: white;
+      max-width: 850px;
+      margin: auto;
+    }
+
+    .reader-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #374151;
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .reader-page {
+      background: white;
+      color: #1f2937;
+      min-height: 280px;
+      border-radius: 10px;
+      padding: 35px;
+      text-align: center;
+    }
+
+    .reader-page h3 {
+      margin-bottom: 20px;
+    }
+
+    .reader-page p {
+      line-height: 2;
+      color: #4b5563;
+    }
+
+    .security-message {
+      margin-top: 15px;
+      color: #fbbf24;
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* CTA */
+    .cta {
+      background: #2563eb;
+      color: white;
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+
+    .cta p {
+      margin-bottom: 25px;
+      opacity: 0.9;
+    }
+
+    .cta .btn {
+      background: white;
+      color: #2563eb;
+    }
+
+    /* Footer */
+    footer {
+      background: #0f172a;
+      color: white;
+      padding: 40px 0;
+      text-align: center;
+    }
+
+    footer p {
+      color: #94a3b8;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-content {
+        grid-template-columns: 1fr;
+      }
+
+      .features,
+      .books,
+      .plans {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-text h1 {
+        font-size: 32px;
+      }
+
+      .features,
+      .books,
+      .plans {
+        grid-template-columns: 1fr;
+      }
+
+      .plan.featured {
+        transform: none;
+      }
+
+      .nav-buttons .btn-outline {
+        display: none;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .floating-card {
+        right: 10px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <header>
+    <div class="container">
+      <nav>
+        <div class="logo">
+          اقرأ<span>.</span>
+        </div>
+
+        <div class="nav-links">
+          <a href="#home">الرئيسية</a>
+          <a href="#books">المكتبة</a>
+          <a href="#courses">الدورات</a>
+          <a href="#plans">الباقات</a>
+          <a href="#contact">تواصل معنا</a>
+        </div>
+
+        <div class="nav-buttons">
+          <button class="btn btn-outline">تسجيل الدخول</button>
+          <button class="btn btn-primary">إنشاء حساب</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- Hero -->
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+
+        <div class="hero-text">
+          <h1>
+            تعلم، اقرأ، وطور
+            <span>مستقبلك</span>
+          </h1>
+
+          <p>
+            منصة تعليمية متكاملة تجمع بين الكتب الإلكترونية،
+            الدورات التعليمية، وأوراق العمل في مكان واحد.
+          </p>
+
+          <div class="hero-buttons">
+            <button class="btn btn-primary">
+              استكشف المكتبة
+            </button>
+
+            <button class="btn btn-outline">
+              تعرف على الدورات
+            </button>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <img
+            src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?auto=format&fit=crop&w=900&q=80"
+            alt="Books"
+          />
+
+          <div class="floating-card">
+            <div class="floating-icon">📚</div>
+            <div>
+              <strong>مكتبة متكاملة</strong>
+              <p style="font-size: 12px; color: #64748b;">
+                آلاف الكتب التعليمية
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Features -->
+  <section>
+    <div class="container">
+
+      <div class="section-header">
+        <h2>كل ما تحتاجه للتعلم</h2>
+        <p>تجربة تعليمية سهلة وآمنة من أي جهاز</p>
+      </div>
+
+      <div class="features">
+
+        <div class="feature-card">
+          <div class="feature-icon">🔒</div>
+          <h3>محتوى محمي</h3>
+          <p>
+            اقرأ الكتب داخل المنصة بدون الحاجة إلى تحميلها،
+            مع حماية المحتوى من الوصول غير المصرح به.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📥</div>
+          <h3>ملفات قابلة للتحميل</h3>
+          <p>
+            إمكانية تحميل أوراق العمل والكتب التي يسمح
+            صاحب المحتوى بتحميلها.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>متاح على جميع الأجهزة</h3>
+          <p>
+            تصميم متجاوب يعمل بشكل ممتاز على الهاتف،
+            التابلت، والكمبيوتر.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Books -->
+  <section id="books">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>استكشف مكتبتنا</h2>
+        <p>مجموعة متنوعة من الكتب والملفات التعليمية</p>
+      </div>
+
+      <div class="books">
+
+        <div class="book-card">
+          <div class="book-cover">📖</div>
+
+          <div class="book-info">
+            <h3>أساسيات الرياضيات</h3>
+            <p>كتاب تعليمي شامل للمبتدئين</p>
+
+            <div class="book-footer">
+              <span class="badge protected">
+                🔒 قراءة فقط
+              </span>
+
+              <button class="btn btn-primary" onclick="openReader()">
+                قراءة
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="book-card">
+          <div class="book-cover">📘</div>
+
+          <div class="book-info">
+            <h3>دليل التعلم الذاتي</h3>
+            <p>خطوات عملية لتطوير مهاراتك</p>
+
+            <div class="book-footer">
+              <span class="badge protected">
+                🔒 قراءة فقط
+              </span>
+
+              <button class="btn btn-primary" onclick="openReader()">
+                قراءة
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="book-card">
+          <div class="book-cover">📝</div>
+
+          <div class="book-info">
+            <h3>أوراق عمل تدريبية</h3>
+            <p>ملفات قابلة للتحميل والطباعة</p>
+
+            <div class="book-footer">
+              <span class="badge download">
+                📥 قابل للتحميل
+              </span>
+
+              <button class="btn btn-primary">
+                تحميل
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Protected Reader Demo -->
+  <section>
+    <div class="container">
+
+      <div class="section-header">
+        <h2>قارئ الكتب الإلكتروني</h2>
+        <p>مثال على قراءة الكتب المحمية داخل المنصة</p>
+      </div>
+
+      <div class="reader-demo">
+
+        <div class="reader-top">
+          <strong>أساسيات الرياضيات</strong>
+          <span>صفحة 1 من 120</span>
+        </div>
+
+        <div class="reader-page">
+          <h3>الفصل الأول: مقدمة في الرياضيات</h3>
+
+          <p>
+            هذا نموذج توضيحي للقارئ الإلكتروني.
+            في النظام الحقيقي يتم عرض الكتاب داخل المنصة
+            مع التحكم في صلاحيات الوصول للمحتوى.
+          </p>
+
+          <br>
+
+          <p>
+            يمكن إضافة أدوات مثل التكبير، التنقل بين الصفحات،
+            البحث داخل الكتاب، وإضافة العلامات المرجعية.
+          </p>
+        </div>
+
+        <div class="security-message">
+          🔒 هذا المحتوى محمي ومتاح للقراءة فقط
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Courses -->
+  <section id="courses">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>الدورات التعليمية</h2>
+        <p>تعلم من خلال دورات عملية ومحتوى منظم</p>
+      </div>
+
+      <div class="features">
+
+        <div class="feature-card">
+          <div class="feature-icon">💻</div>
+          <h3>أساسيات البرمجة</h3>
+          <p>ابدأ رحلتك في عالم البرمجة من الصفر.</p>
+          <button class="btn btn-primary">عرض الدورة</button>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🎨</div>
+          <h3>التصميم الإبداعي</h3>
+          <p>طور مهاراتك في التصميم بطريقة عملية.</p>
+          <button class="btn btn-primary">عرض الدورة</button>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>تطوير المهارات</h3>
+          <p>دورات تساعدك على تطوير مهاراتك.</p>
+          <button class="btn btn-primary">عرض الدورة</button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- Pricing -->
+  <section class="pricing" id="plans">
+    <div class="container">
+
+      <div class="section-header">
+        <h2>اختر الباقة المناسبة لك</h2>
+        <p>ابدأ رحلتك التعليمية اليوم</p>
+      </div>
+
+      <div class="plans">
+
+        <div class="plan">
+          <h3>الباقة الأساسية</h3>
+
+          <div class="price">
+            99 <small>جنيه / شهر</small>
+          </div>
+
+          <ul>
+            <li>✓ الوصول إلى الكتب الأساسية</li>
+            <li>✓ قراءة الكتب المحمية</li>
+            <li>✓ دعم فني</li>
+          </ul>
+
+          <button class="btn btn-outline">
+            اشترك الآن
+          </button>
+        </div>
+
+
+        <div class="plan featured">
+          <h3>الباقة المتقدمة</h3>
+
+          <div class="price">
+            199 <small>جنيه / شهر</small>
+          </div>
+
+          <ul>
+            <li>✓ جميع الكتب التعليمية</li>
+            <li>✓ جميع الدورات</li>
+            <li>✓ ملفات وأوراق عمل</li>
+            <li>✓ دعم مميز</li>
+          </ul>
+
+          <button class="btn btn-primary">
+            اشترك الآن
+          </button>
+        </div>
+
+
+        <div class="plan">
+          <h3>الباقة السنوية</h3>
+
+          <div class="price">
+            999 <small>جنيه / سنة</small>
+          </div>
+
+          <ul>
+            <li>✓ وصول كامل للمحتوى</li>
+            <li>✓ جميع الدورات</li>
+            <li>✓ خصومات حصرية</li>
+          </ul>
+
+          <button class="btn btn-outline">
+            اشترك الآن
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- CTA -->
+  <section class="cta" id="contact">
+    <div class="container">
+
+      <h2>ابدأ رحلة التعلم اليوم</h2>
+
+      <p>
+        اكتشف الكتب والدورات التي تساعدك على تحقيق أهدافك.
+      </p>
+
+      <button class="btn">
+        إنشاء حساب مجاني
+      </button>
+
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <h3>أكاديمية اقرأ</h3>
+      <p>
+        منصة تعليمية تجمع المعرفة والتعلم في مكان واحد.
+      </p>
+
+      <p>
+        © 2026 جميع الحقوق محفوظة
+      </p>
+    </div>
+  </footer>
+
+
+  <script>
+    function openReader() {
+      alert(
+        "سيتم فتح الكتاب داخل القارئ الإلكتروني.\n\n" +
+        "🔒 الكتاب محمي للقراءة فقط ولا يوجد خيار تحميل مباشر."
+      );
+    }
+  </script>
+
+</body>
+</html>
